@@ -1,0 +1,71 @@
+.score {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+    height: auto;
+    position: absolute;
+    top : 25%;
+    left : 15%;
+
+}
+
+.player1 , .player2 {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    height: 500px;
+    align-items: center;
+    justify-content: center;
+    top : 50%;
+
+}
+
+.player1 {
+    background-color: rgb(230, 225, 225);  
+}
+
+.player2 {
+    background-color: white;  
+}
+
+h1, h2 {
+    text-transform: uppercase;
+    font-family: 'Lato', sans-serif;
+    font-weight: 100;
+}
+
+.redpoint{
+    background-color: rgb(206, 96, 78);
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    margin-left : 10px;
+}
+
+.game{
+    position: absolute;
+    top : 27%;
+    left : 47%;
+    display: flex;
+}
+
+.newgame {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 10px;;
+}
+
+.circle {
+    border-radius: 100%;
+    background-color: none;
+    height: 20px;
+    width: 20px;
+    color :rgb(206, 96, 78);
+    font-size: px;
+    border : 1px solid rgb(206, 96, 78);
+    top:50%;
+    margin-right: 10px;
+}
