@@ -1,3 +1,7 @@
+html {
+    background-color: firebrick;
+}
+
 .score {
     display: flex;
     flex-direction: row;
@@ -7,13 +11,12 @@
     height: auto;
     position: absolute;
     top : 25%;
-    left : 15%;
-
+    transform: translateX(15.5%);
 }
 
 .player1 , .player2 {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 50%;
     height: 500px;
     align-items: center;
@@ -30,7 +33,12 @@
     background-color: white;  
 }
 
-h1, h2 {
+.player__name {
+    display: flex;
+    flex-direction: row;
+}
+
+h1, h2, h3 {
     text-transform: uppercase;
     font-family: 'Lato', sans-serif;
     font-weight: 100;
@@ -41,7 +49,8 @@ h1, h2 {
     width: 10px;
     height: 10px;
     border-radius: 100%;
-    margin-left : 10px;
+    margin-left : 20px;
+    margin-top: 30px;
 }
 
 .game{
@@ -68,4 +77,40 @@ h1, h2 {
     border : 1px solid rgb(206, 96, 78);
     top:50%;
     margin-right: 10px;
+}
+
+.die {
+    position: absolute;
+    filter : drop-shadow(0 0 0.75rem grey);
+    top : 300%;
+    height: 100px;
+}
+
+.player__score {
+    text-align: center;
+    color: rgb(206, 96, 78);
+    font-family: 'Lato', sans-serif;
+    font-size: 50px;
+    font-weight: 100;
+}
+
+.player__currentScore {
+    height: 80px;
+    width: 100px;
+    background-color: rgb(206, 96, 78);
+    margin-top: 100px;
+    color: white;
+    text-align: center;
+}
+
+h3 {
+    font-size: 14px;
+    color : black;
+}
+
+.player__currentScore--score {
+    margin-top: -10px;
+    font-size : 25px;
+    font-weight: 100;
+    font-family: 'Lato', sans-serif;
 }
