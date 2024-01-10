@@ -12,7 +12,9 @@
 </head>
 <body>
     <h1>Jeu de dés</h1>
+    <!--START SECTION SCORE : 2 players, global score and current score -->
     <section class="score">
+        <!-- START DIV PLAYER 1-->
         <div class="player1">
             <div class="player__name">
                 <h2>Player 1</h2>
@@ -24,6 +26,9 @@
                 <p class="player__currentScore--score">0</p>
             </div>
         </div>
+        <!-- END DIV PLAYER 1-->
+
+        <!-- START DIV PLAYER 2-->
         <div class="player2">
             <div class="player__name">
                 <h2>Player 2</h2>
@@ -35,17 +40,19 @@
                 <p class="player__currentScore--score">0</p>
             </div>
         </div>
-
+        <!-- END DIV PLAYER 2-->
     </section>
+    <!--END SECTION SCORE : 2 players, global score and current score -->
 
+    <!--START SECTION GAME : Die, buttons -->
     <section class="game">
         <div class="newgame">
-            <button class="material-symbols-outlined circle">
+            <button class="material-symbols-outlined circle js-newgame__button">
                 add_circle
             </button>
             <h4>New game</h1>
         </div>
-        <img class="die" src="ressources/de1.png" alt="Face d'un dé avec le numéro 1">
+        <img class="die js-die hidden" src="ressources/de1.png" alt="Face d'un dé avec le numéro 1">
         <div class="roll">
             <button class="material-symbols-outlined circle">
                 autorenew
@@ -59,5 +66,8 @@
             <h4>Hold</h4>
         </div>
     </section>
+    <!--END SECTION GAME : Die, buttons -->
+
+    <script src="script.js"></script>
 </body>
 </html>

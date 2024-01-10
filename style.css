@@ -2,6 +2,7 @@ html {
     background-color: firebrick;
 }
 
+/*Titre */
 h1 {
     font-family: 'Lato', sans-serif;
     text-transform: uppercase;
@@ -11,6 +12,14 @@ h1 {
     padding-top: 5%;
 }
 
+/*Titres */
+h4, h2, h3 {
+    text-transform: uppercase;
+    font-family: 'Lato', sans-serif;
+    font-weight: 100;
+}
+
+/*Container principal des deux joueurs */
 .score {
     display: flex;
     flex-direction: row;
@@ -23,6 +32,7 @@ h1 {
     transform: translateX(15.5%);
 }
 
+/*Container de chaque joueur */
 .player1 , .player2 {
     display: flex;
     flex-direction: column;
@@ -42,17 +52,46 @@ h1 {
     background-color: white;  
 }
 
+/* Scores */
+.player__score {
+    text-align: center;
+    color: rgb(206, 96, 78);
+    font-family: 'Lato', sans-serif;
+    font-size: 50px;
+    font-weight: 100;
+}
+
+/* Score courrant */
+.player__currentScore {
+    height: 80px;
+    width: 100px;
+    background-color: rgb(206, 96, 78);
+    margin-top: 100px;
+    color: white;
+    text-align: center;
+}
+
+/* Titre courrant */
+h3 {
+    font-size: 14px;
+    color : black;
+}
+
+
+.player__currentScore--score {
+    margin-top: -10px;
+    font-size : 25px;
+    font-weight: 100;
+    font-family: 'Lato', sans-serif;
+}
+/*Nom du joeur */
 .player__name {
     display: flex;
     flex-direction: row;
 }
 
-h4, h2, h3 {
-    text-transform: uppercase;
-    font-family: 'Lato', sans-serif;
-    font-weight: 100;
-}
 
+/*Points rouges */
 .redpoint{
     background-color: rgb(206, 96, 78);
     width: 10px;
@@ -62,6 +101,7 @@ h4, h2, h3 {
     margin-top: 30px;
 }
 
+/* Container de la zone centrale avec dé, et les boutons */
 .game{
     position: absolute;
     top : 27%;
@@ -77,6 +117,8 @@ h4, h2, h3 {
     font-size: 10px;
 }
 
+
+/* bouttons pour jouer */
 .circle {
     color :rgb(206, 96, 78);
     top:50%;
@@ -85,42 +127,6 @@ h4, h2, h3 {
     border: none;
     background-color: none;
     border-radius: 100%;
-}
-
-.die {
-    position: absolute;
-    filter : drop-shadow(0 0 0.75rem grey);
-    top : 300%;
-    height: 100px;
-}
-
-.player__score {
-    text-align: center;
-    color: rgb(206, 96, 78);
-    font-family: 'Lato', sans-serif;
-    font-size: 50px;
-    font-weight: 100;
-}
-
-.player__currentScore {
-    height: 80px;
-    width: 100px;
-    background-color: rgb(206, 96, 78);
-    margin-top: 100px;
-    color: white;
-    text-align: center;
-}
-
-h3 {
-    font-size: 14px;
-    color : black;
-}
-
-.player__currentScore--score {
-    margin-top: -10px;
-    font-size : 25px;
-    font-weight: 100;
-    font-family: 'Lato', sans-serif;
 }
 
 h4 {
@@ -134,4 +140,18 @@ h4 {
 
 .hold {
     top : 700%;
+}
+
+
+/*Dé */
+.die {
+    position: absolute;
+    filter : drop-shadow(0 0 0.75rem grey);
+    top : 300%;
+    height: 100px;
+}
+
+/*Caché */
+.hidden {
+    visibility: hidden;
 }
