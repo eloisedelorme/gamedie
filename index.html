@@ -13,17 +13,17 @@
 <body>
     <h1>Jeu de dés</h1>
     <!--START SECTION SCORE : 2 players, global score and current score -->
-    <section class="score">
+    <section class="score js-scoreCard">
         <!-- START DIV PLAYER 1-->
         <div class="player1">
             <div class="player__name">
-                <h2>Player 1</h2>
+                <h2 class="js-player1">Player 1</h2>
                 <div class="redpoint"></div>
             </div>
-            <div class="player__score">0</div>
+            <div class="player__score js-score js-player__score-1">0</div>
             <div class="player__currentScore">
                 <h3>Current</h3>
-                <p class="player__currentScore--score">0</p>
+                <p class="player__currentScore--score js-score">0</p>
             </div>
         </div>
         <!-- END DIV PLAYER 1-->
@@ -31,13 +31,13 @@
         <!-- START DIV PLAYER 2-->
         <div class="player2">
             <div class="player__name">
-                <h2>Player 2</h2>
-                <div class="redpoint"></div>
+                <h2 class="js-player2">Player 2</h2>
+                <div class=""></div>
             </div>
-            <div class="player__score">0</div>
+            <div class="player__score js-score js-player__score-2">0</div>
             <div class="player__currentScore">
                 <h3>Current</h3>
-                <p class="player__currentScore--score">0</p>
+                <p class="player__currentScore--score js-score">0</p>
             </div>
         </div>
         <!-- END DIV PLAYER 2-->
@@ -52,8 +52,8 @@
             </button>
             <h4>New game</h1>
         </div>
-        <img class="die js-die hidden" src="ressources/de1.png" alt="Face d'un dé avec le numéro 1">
-        <div class="roll">
+        <img class="die js-die__image hidden" src="ressources/de1.png" alt="Face d'un dé avec le numéro 1">
+        <div class="roll js-roll">
             <button class="material-symbols-outlined circle">
                 autorenew
             </button>    
