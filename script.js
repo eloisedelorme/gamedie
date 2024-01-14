@@ -8,59 +8,56 @@ Le jeu comprend 2 joueurs sur un seul et même écran.
 Chaque joueur possède un score temporaire (ROUND) et un score global (GLOBAL).
 
 */
-
-const player1 = {
-    name: "",
-    currentScore : 0,
-    globalScore : 0,
-};
-
-const player2 = {
-    name: "",
-    currentScore : 0,
-    globalScore : 0,
-};
+const players = [
+    {'id':1, 
+    'name':'' ,
+    'currentScore' : 0,
+    'globalScore' : 0}
+    , 
+    {'id':2,
+    'name':'' ,
+    'currentScore' : 0,
+    'globalScore' : 0
+    }
+];
 
 /* Phase 0 : Créer une nouvelle partie 
 1) Cliquer sur le bouton New game */
 
-const start = () => {
+function start() {
     const buttonStart = document.querySelector(
         ".js-newgame__button"
-        );
+    );
     buttonStart.addEventListener("click", () => {
         // console.log("Démarré");
-
-
         /* 3) Définir les joueurs" */
-
-        for(i=1;i<3;i++) {
+        for (i = 1; i < 3; i++) {
             playerName(i);
+            
         };
+
+
 
         /* 2) Mettre les scores à 0 */
         const scoresStart = document.querySelectorAll(".js-score");
         scoresStart.forEach((score) => {
-        score.textContent = 0;
+            score.textContent = 0;
+            for (i = 0; i < 2; i++) {
+                players[i].globalScore = 0;
+                players[i].currentScore = 0;        
+            };
         });
         
+
 
         /* 3) Afficher le dé */
         const die = document.querySelector(".js-die__image");
         die.classList.remove("hidden");
 
         /* 4) Démarrer la partie */
+        
 
-        let playerGaming = player1;
-
-        const gaming = (playerGaming) => {
-            
-        };
-
-        // Lancement fonction lancé de dé
-        dieLaunching();
-
-
+            dieLaunching(1);
     });
 }
 
@@ -68,10 +65,11 @@ const start = () => {
 
 const playerName = (playerNumber) => {
     //Changer le nom du joueur
-    const askedName = prompt(`Qui est votre joueur ${playerNumber}`);
+    const askedName = prompt(`Qui est votre joueur n°${playerNumber}`);
     const newName = document.querySelector(`.js-player${playerNumber}`);
     newName.textContent = askedName;
-    (`player${playerNumber}`).name = askedName;
+    const playerId = playerNumber - 1 ;
+    players[playerId].name = askedName;
 };
 
 // Fonction pour la partie
@@ -95,18 +93,30 @@ s'il clique sur hold, les points s'ajoute au  globalScore et c'est à l'autre jo
 
 // Fonction de lancé de dé.
 
-const dieLaunching = () => {
+const dieLaunching = (playerGaming) => {
     const rolledDie = document.querySelector(
         ".js-roll"
         );
     rolledDie.addEventListener("click", () => {
         const dieValue = getRandomInt();
-        console.log(dieValue);
         dieLook(dieValue);
-    });
+    
+    if (dieValue > 1) { 
+    
+        players[(playerGaming-1)].currentScore = players[(playerGaming-1)].currentScore + dieValue ;
+        const newCurrentScore = document.querySelector(`.js-currentScore-${playerGaming}`);
+        newCurrentScore.textContent = players[(playerGaming-1)].currentScore;
+        
+    } else {
+    players[(playerGaming-1)].currentScore = 0;
+    
+        const newCurrentScore = document.querySelector(`.js-currentScore-${playerGaming}`);
+        newCurrentScore.textContent = players[(playerGaming-1)].currentScore;
+        playerGaming = playerChangement(playerGaming);
+        
+  }; console.log(players);
+}); 
 };
-
-
 
 // Fonction nombre aléatoire entre 1 et 6
 const getRandomInt = () => {
@@ -118,17 +128,35 @@ const getRandomInt = () => {
 // Fonction d'affichage du dé
 const dieLook = (value) => {
     const newSource = `ressources/de${value}.png`;
-    console.log(newSource);
     const oldSource = document.getElementsByClassName('js-die__image').item(0).src;
-    console.log(oldSource);
     document.getElementsByClassName('js-die__image').item(0).src =`ressources/de${value}.png`
-}
+};
+
+
+
 
 // Fonction changer de joueur
+const playerChangement = (playerGaming) => {
 
+    const nonVisualPlayer = document.querySelector(`.js-player${playerGaming}__point`);
+    nonVisualPlayer.classList.remove("redpoint");
 
-const playerChangement = () => {
-
+    const newPlayerGaming = playerGaming == 1 ? 2 : 1;
+    
+    const visualPlayer = document.querySelector(`.js-player${newPlayerGaming}__point`);
+    visualPlayer.classList.add("redpoint");
+    
+    playerGaming = newPlayerGaming;
+    return playerGaming;
 }
+
+// Fonction garder les points 
+
+const holdPoint = (playerGaming) => {
+
+};
 /* Lancement des fonctions */
 start();
+
+
+
