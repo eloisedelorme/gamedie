@@ -102,19 +102,21 @@ const dieLaunching = (playerGaming) => {
         dieLook(dieValue);
     
     if (dieValue > 1) { 
-    
-        players[(playerGaming-1)].currentScore = players[(playerGaming-1)].currentScore + dieValue ;
-        const newCurrentScore = document.querySelector(`.js-currentScore-${playerGaming}`);
-        newCurrentScore.textContent = players[(playerGaming-1)].currentScore;
+        updateCurrentScore(playerGaming , dieValue);
         
+        const holdButton = document.querySelector('.js-hold__button');
+        holdButton.addEventListener('click', () => {
+            holdPoint(playerGaming);
+            playerGaming = playerChangement(playerGaming) ;
+        });
+
     } else {
-    players[(playerGaming-1)].currentScore = 0;
-    
-        const newCurrentScore = document.querySelector(`.js-currentScore-${playerGaming}`);
-        newCurrentScore.textContent = players[(playerGaming-1)].currentScore;
-        playerGaming = playerChangement(playerGaming);
         
-  }; console.log(players);
+        updateCurrentScore(playerGaming , 0);
+
+        playerGaming = playerChangement(playerGaming) ;
+        
+    }; console.log(playerGaming);
 }); 
 };
 
@@ -132,7 +134,18 @@ const dieLook = (value) => {
     document.getElementsByClassName('js-die__image').item(0).src =`ressources/de${value}.png`
 };
 
+// fonction de mise à jour du currentScore 
 
+const updateCurrentScore = (playerGaming , dieValue) => {
+    if (dieValue == 0) {
+        players[(playerGaming-1)].currentScore = 0;
+    } else {
+        players[(playerGaming-1)].currentScore = players[(playerGaming-1)].currentScore + dieValue ;
+    };
+        
+    const newCurrentScore = document.querySelector(`.js-currentScore-${playerGaming}`);
+    newCurrentScore.textContent = players[(playerGaming-1)].currentScore;
+};
 
 
 // Fonction changer de joueur
@@ -148,13 +161,32 @@ const playerChangement = (playerGaming) => {
     
     playerGaming = newPlayerGaming;
     return playerGaming;
-}
+};
 
 // Fonction garder les points 
+/* à chaque clic sur le bouton hold le currentScore s'ajoute au globalSCore.
+le global score se met à jour dans l'affichage. 
+Si le global score > 100 alors le joueur gagne et fin de la partie. 
+Une alerte s'affiche avec le nom du joueur et son Global score.
+Si le score global < 100 le current score tombe à 0 et on change de joueur */
 
 const holdPoint = (playerGaming) => {
+    players[(playerGaming-1)].globalScore = players[(playerGaming-1)].globalScore + players[(playerGaming-1)].currentScore ;
+    const newGlobalScore = document.querySelector(`.js-globalScore-${playerGaming}`);
+    newGlobalScore.textContent = players[(playerGaming-1)].globalScore;
 
+    updateCurrentScore(playerGaming , 0);
+    
+    if(players[(playerGaming-1)].globalScore > 99 ) {
+        alert(`Bravo ${players[(playerGaming-1)].name}, vous avez gagné !`);
+        for (i = 0; i < 2; i++) {
+            players[i].globalScore = 0;
+            players[i].currentScore = 0;        
+        };
+
+    }; 
 };
+    
 /* Lancement des fonctions */
 start();
 
