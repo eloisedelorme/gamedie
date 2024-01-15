@@ -176,17 +176,17 @@ holdButton.addEventListener('click', () => {
 
     console.log(players);
     console.log(whichPlayer[0].playerActive);
+    winner();
 });
 
-if(players[(0)].globalScore > 99 || players[(1)].globalScore > 99 ) {
-    alert(`Bravo ${players[(whichPlayer[0].playerActive-1)].name}, vous avez gagné !`);
-    for (i = 0; i < 2; i++) {
-        players[i].globalScore = 0;
-        players[i].currentScore = 0;        
+let winner = () => {
+    if(players[0].globalScore > 99 ) {
+        alert(`Bravo ${players[0].name}, vous avez gagné !`);
+    } else if(players[1].globalScore > 99 ) {
+        alert(`Bravo ${players[1].name}, vous avez gagné !`);
     };
 };
 
 /* Lancement des fonctions */
 start();
 
-console.log(players);
