@@ -64,7 +64,7 @@ h4, h2, h3 {
 /* Score courrant */
 .player__currentScore {
     height: 80px;
-    width: 100px;
+    width: 120px;
     background-color: rgb(206, 96, 78);
     margin-top: 100px;
     color: white;
@@ -155,3 +155,63 @@ h4 {
 .hidden {
     visibility: hidden;
 }
+
+@media screen and (max-width : 728px) {
+    html {
+        overflow: hidden;
+    }
+
+    .score {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 97%;
+        height: auto;
+        position: absolute;
+        transform: translateX(0);
+        top : 110px;
+        margin-top: 20px;
+    }
+    
+    .player1 , .player2 {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 50%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    h4, h2, h3 {
+        text-transform: uppercase;
+        font-family: 'Lato', sans-serif;
+        font-weight: 500;
+    }
+
+    .game{
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        left : 10px;
+    }
+
+    .player__currentScore {
+        height: 80px;
+        width: 120px;
+        background-color: rgb(206, 96, 78);
+        margin-bottom: 100px;
+        margin-top: 0;
+        color: white;
+        text-align: center;
+    }
+
+    .die {
+        position: absolute;
+        filter : drop-shadow(0 0 0.75rem grey);
+        top : 190%;
+        height: 100px;
+    }
+
+}
+    

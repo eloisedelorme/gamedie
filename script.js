@@ -8,7 +8,7 @@ Le jeu comprend 2 joueurs sur un seul et même écran.
 Chaque joueur possède un score temporaire (ROUND) et un score global (GLOBAL).
 
 */
-const players = [
+let players = [
     {'id':1, 
     'name':'' ,
     'currentScore' : 0,
@@ -21,11 +21,15 @@ const players = [
     }
 ];
 
+let whichPlayer = [
+    {'playerActive' : 1 }
+];
+console.log(whichPlayer[0].playerActive)
 /* Phase 0 : Créer une nouvelle partie 
 1) Cliquer sur le bouton New game */
 
 function start() {
-    const buttonStart = document.querySelector(
+    let buttonStart = document.querySelector(
         ".js-newgame__button"
     );
     buttonStart.addEventListener("click", () => {
@@ -39,7 +43,7 @@ function start() {
 
 
         /* 2) Mettre les scores à 0 */
-        const scoresStart = document.querySelectorAll(".js-score");
+        let scoresStart = document.querySelectorAll(".js-score");
         scoresStart.forEach((score) => {
             score.textContent = 0;
             for (i = 0; i < 2; i++) {
@@ -51,13 +55,13 @@ function start() {
 
 
         /* 3) Afficher le dé */
-        const die = document.querySelector(".js-die__image");
+        let die = document.querySelector(".js-die__image");
         die.classList.remove("hidden");
 
         /* 4) Démarrer la partie */
         
 
-            dieLaunching(1);
+        dieLaunching();
     });
 }
 
@@ -93,74 +97,65 @@ s'il clique sur hold, les points s'ajoute au  globalScore et c'est à l'autre jo
 
 // Fonction de lancé de dé.
 
-const dieLaunching = (playerGaming) => {
-    const rolledDie = document.querySelector(
+let dieLaunching = () => {
+    let rolledDie = document.querySelector(
         ".js-roll"
         );
     rolledDie.addEventListener("click", () => {
-        const dieValue = getRandomInt();
+        let dieValue = getRandomInt();
         dieLook(dieValue);
+
+    updateCurrentScore(dieValue);
+        
     
-    if (dieValue > 1) { 
-        updateCurrentScore(playerGaming , dieValue);
-        
-        const holdButton = document.querySelector('.js-hold__button');
-        holdButton.addEventListener('click', () => {
-            holdPoint(playerGaming);
-            playerGaming = playerChangement(playerGaming) ;
-        });
-
-    } else {
-        
-        updateCurrentScore(playerGaming , 0);
-
-        playerGaming = playerChangement(playerGaming) ;
-        
-    }; console.log(playerGaming);
 }); 
+    
 };
 
+
 // Fonction nombre aléatoire entre 1 et 6
-const getRandomInt = () => {
+let getRandomInt = () => {
     const max = 7;
     const min = 1;
     return Math.floor(Math.random() * (max - min) + min);
 };
 
 // Fonction d'affichage du dé
-const dieLook = (value) => {
-    const newSource = `ressources/de${value}.png`;
-    const oldSource = document.getElementsByClassName('js-die__image').item(0).src;
+let dieLook = (value) => {
+    let newSource = `ressources/de${value}.png`;
+    let oldSource = document.getElementsByClassName('js-die__image').item(0).src;
     document.getElementsByClassName('js-die__image').item(0).src =`ressources/de${value}.png`
 };
 
 // fonction de mise à jour du currentScore 
 
-const updateCurrentScore = (playerGaming , dieValue) => {
-    if (dieValue == 0) {
-        players[(playerGaming-1)].currentScore = 0;
+let updateCurrentScore = (dieValue) => {
+    let newCurrentScore = document.querySelector(`.js-currentScore-${whichPlayer[0].playerActive}`);
+
+    if (dieValue == 1) {
+        players[(whichPlayer[0].playerActive-1)].currentScore = 0;
+        newCurrentScore.textContent = players[(whichPlayer[0].playerActive)-1].currentScore;
+        playerChangement()
     } else {
-        players[(playerGaming-1)].currentScore = players[(playerGaming-1)].currentScore + dieValue ;
+        players[(whichPlayer[0].playerActive-1)].currentScore = players[whichPlayer[0].playerActive-1].currentScore + dieValue ;
+        newCurrentScore.textContent = players[(whichPlayer[0].playerActive)-1].currentScore;
     };
         
-    const newCurrentScore = document.querySelector(`.js-currentScore-${playerGaming}`);
-    newCurrentScore.textContent = players[(playerGaming-1)].currentScore;
 };
 
-
 // Fonction changer de joueur
-const playerChangement = (playerGaming) => {
+let playerChangement = () => {
 
-    const nonVisualPlayer = document.querySelector(`.js-player${playerGaming}__point`);
+    let nonVisualPlayer = document.querySelector(`.js-player${whichPlayer[0].playerActive}__point`);
     nonVisualPlayer.classList.remove("redpoint");
 
-    const newPlayerGaming = playerGaming == 1 ? 2 : 1;
+    let newPlayerGaming = whichPlayer[0].playerActive == 1 ? 2 : 1;
+    whichPlayer[0].playerActive = newPlayerGaming;
+    console.log(`player actif dans player changement ${whichPlayer[0].playerActive}`)
     
-    const visualPlayer = document.querySelector(`.js-player${newPlayerGaming}__point`);
+    let visualPlayer = document.querySelector(`.js-player${whichPlayer[0].playerActive}__point`);
     visualPlayer.classList.add("redpoint");
     
-    playerGaming = newPlayerGaming;
-    return playerGaming;
 };
 
 // Fonction garder les points 
@@ -170,25 +165,28 @@ Si le global score > 100 alors le joueur gagne et fin de la partie.
 Une alerte s'affiche avec le nom du joueur et son Global score.
 Si le score global < 100 le current score tombe à 0 et on change de joueur */
 
-const holdPoint = (playerGaming) => {
-    players[(playerGaming-1)].globalScore = players[(playerGaming-1)].globalScore + players[(playerGaming-1)].currentScore ;
-    const newGlobalScore = document.querySelector(`.js-globalScore-${playerGaming}`);
-    newGlobalScore.textContent = players[(playerGaming-1)].globalScore;
 
-    updateCurrentScore(playerGaming , 0);
+let holdButton = document.querySelector('.js-hold__button');
+holdButton.addEventListener('click', () => {
+    players[(whichPlayer[0].playerActive-1)].globalScore = players[(whichPlayer[0].playerActive-1)].globalScore + players[(whichPlayer[0].playerActive-1)].currentScore ;
+    let newGlobalScore = document.querySelector(`.js-globalScore-${whichPlayer[0].playerActive}`);
+    newGlobalScore.textContent = players[(whichPlayer[0].playerActive-1)].globalScore;
     
-    if(players[(playerGaming-1)].globalScore > 99 ) {
-        alert(`Bravo ${players[(playerGaming-1)].name}, vous avez gagné !`);
-        for (i = 0; i < 2; i++) {
-            players[i].globalScore = 0;
-            players[i].currentScore = 0;        
-        };
+    updateCurrentScore(1);
 
-    }; 
+    console.log(players);
+    console.log(whichPlayer[0].playerActive);
+});
+
+if(players[(0)].globalScore > 99 || players[(1)].globalScore > 99 ) {
+    alert(`Bravo ${players[(whichPlayer[0].playerActive-1)].name}, vous avez gagné !`);
+    for (i = 0; i < 2; i++) {
+        players[i].globalScore = 0;
+        players[i].currentScore = 0;        
+    };
 };
-    
+
 /* Lancement des fonctions */
 start();
 
-
-
+console.log(players);
