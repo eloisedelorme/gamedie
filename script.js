@@ -1,13 +1,5 @@
-/* En front-desk (côté client) :
-La possibilité de créer une nouvelle partie
-La possibilité de retenir le score courant
-La possibilité de lancer le dé
-La possibilité d’avoir 2 joueurs
+// Tableau d'objet contenant les données de chaque joueur
 
-Le jeu comprend 2 joueurs sur un seul et même écran. 
-Chaque joueur possède un score temporaire (ROUND) et un score global (GLOBAL).
-
-*/
 let players = [
     {'id':1, 
     'name':'' ,
@@ -21,11 +13,13 @@ let players = [
     }
 ];
 
+// Tableau d'objet contenant le joueur actif
 let whichPlayer = [
     {'playerActive' : 1 }
 ];
-console.log(whichPlayer[0].playerActive)
-/* Phase 0 : Créer une nouvelle partie 
+
+
+/* Fonction Démarrer une nouvelle partie 
 1) Cliquer sur le bouton New game */
 
 function start() {
@@ -76,24 +70,6 @@ const playerName = (playerNumber) => {
     players[playerId].name = askedName;
 };
 
-// Fonction pour la partie
-/*À chaque tour, le joueur a son ROUND initialisé à 0 et peut lancer un dé autant de fois qu'il le souhaite. Le 
-résultat d’un lancer est ajouté au ROUND. 
-Lors de son tour, le joueur peut décider à tout moment de:
-- Cliquer sur l’option “Hold”, qui permet d’envoyer les points du ROUND vers le GLOBAL. Ce sera alors le
-tour de l’autre joueur.
-- Lancer le dé. S’il obtient un 1, son score ROUND est perdu et c’est la fin de son tour.
-Le premier joueur qui atteint les 100 points sur global gagne le jeu.
-*/
-
-/* le jeu continu tant qu'aucun des globalScore n'est à 100. Tester à 15.
-/* Le joueur a un point qui s'affiche à côté de son nom (ajouter la classe redpoint).
-il lance le dé. (bouton hold)
-tirage aléatoire de 1 à 6 (entiers).
-si le dé supérieur à 1 alors les points sont notés dans le current score.
-s'il clique sur roll dice, il relance le dé.
-s'il clique sur hold, les points s'ajoute au  globalScore et c'est à l'autre joueur.
-*/
 
 // Fonction de lancé de dé.
 
@@ -127,7 +103,7 @@ let dieLook = (value) => {
     document.getElementsByClassName('js-die__image').item(0).src =`ressources/de${value}.png`
 };
 
-// fonction de mise à jour du currentScore 
+// Fonction de mise à jour du currentScore 
 
 let updateCurrentScore = (dieValue) => {
     let newCurrentScore = document.querySelector(`.js-currentScore-${whichPlayer[0].playerActive}`);
@@ -158,13 +134,7 @@ let playerChangement = () => {
     
 };
 
-// Fonction garder les points 
-/* à chaque clic sur le bouton hold le currentScore s'ajoute au globalSCore.
-le global score se met à jour dans l'affichage. 
-Si le global score > 100 alors le joueur gagne et fin de la partie. 
-Une alerte s'affiche avec le nom du joueur et son Global score.
-Si le score global < 100 le current score tombe à 0 et on change de joueur */
-
+// Fonction de mise à joueur du globalScore 
 
 let holdButton = document.querySelector('.js-hold__button');
 holdButton.addEventListener('click', () => {
@@ -179,6 +149,7 @@ holdButton.addEventListener('click', () => {
     winner();
 });
 
+// Fonction gagner
 let winner = () => {
     if(players[0].globalScore > 99 ) {
         alert(`Bravo ${players[0].name}, vous avez gagné !`);

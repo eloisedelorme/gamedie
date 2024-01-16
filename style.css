@@ -180,6 +180,7 @@ h4 {
         height: 50%;
         align-items: center;
         justify-content: center;
+        padding-top: 15px;
     }
     h1 {
         visibility: hidden;
@@ -212,7 +213,7 @@ h4 {
     .die {
         position: absolute;
         filter : drop-shadow(0 0 0.75rem grey);
-        top : 100%;
+        top : 85%;
         height: 100px;
         left : 100%;
     }
